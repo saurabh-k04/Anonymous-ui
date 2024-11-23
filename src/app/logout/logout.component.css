@@ -1,0 +1,22 @@
+.logout-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Takes up full viewport height */
+    background-color: #f5f5f5; /* Light background */
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+  
+.logout-page h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+  
+.logout-page p {
+    font-size: 1.2rem;
+    color: #555;
+}
+  

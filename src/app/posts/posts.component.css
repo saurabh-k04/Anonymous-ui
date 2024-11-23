@@ -1,0 +1,29 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto; /* Center the posts container */
+    padding: 20px;
+}
+  
+.post-item {
+    border: 1px solid #ddd; /* Light border around each post */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px; /* Space between posts */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+  
+.username {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px; /* Space between username and description */
+    display: block;
+}
+  
+.description {
+    font-size: 1rem;
+    color: #555;
+    margin: 0; /* Remove extra margin for cleaner spacing */
+    word-wrap: break-word; /* Ensure long words wrap properly */
+}
+  

@@ -1,0 +1,20 @@
+<div class="create-post">
+    <h2>Create a New Post</h2>
+    <!-- <div class="alert alert-warning" *ngIf="createPostForm.dirty && createPostForm.invalid">Enter valid values</div> -->
+    <form (ngSubmit)="onSubmit()" #createPostForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Your Words</mat-label>
+        <textarea matInput placeholder="Write your post here" name="description" [(ngModel)]="post.description" required></textarea>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="!createPostForm.form.valid">Submit</button>
+    </form>
+</div>
+  

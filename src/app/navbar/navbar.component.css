@@ -1,0 +1,48 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: white;
+    font-size: 18px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 40px;
+}
+  
+.navbar-left {
+    font-weight: bold;
+}
+  
+.navbar-right a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+  
+.navbar-right a:hover {
+    text-decoration: underline;
+}
+  
+body {
+    margin: 0;
+    padding-top: 60px; /* Adjust for navbar height */
+}
+
+/* Company Name Link Styling */
+.anonymous .navbar-link {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Set text color to white */
+    font-weight: bold; /* Optional: Make it bold */
+    font-size: 1.2rem; /* Optional: Adjust font size */
+}
+  
+.anonymous .navbar-link:hover {
+    color: #ffcc00; /* Optional: Add a hover effect */
+}
+  

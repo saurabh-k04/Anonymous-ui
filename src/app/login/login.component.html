@@ -1,0 +1,30 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <h1>Login</h1>
+        <form>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" name="username" required="required" [(ngModel)]="username" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" required="required" [(ngModel)]="password" />
+            </mat-form-field>
+
+            <div *ngIf="invalidLogin" class="error-message">
+                {{ errorMessage }}
+            </div>
+
+            <!-- <button mat-raised-button (click)=handleLogin() color="primary" class="login-button">
+                Login
+            </button> -->
+            <button mat-raised-button (click)=handleBasicAuthLogin() color="primary" class="login-button">
+                Login
+            </button>
+        </form>
+        <p class="register-link">
+            Not a user? <a href="/register">Register here</a>
+        </p>
+    </mat-card>
+</div>

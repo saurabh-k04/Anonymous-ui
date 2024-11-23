@@ -1,0 +1,14 @@
+<nav class="navbar">
+    <span class="anonymous">
+        <a href="#" class="navbar-link">Anonymous</a>
+    </span>
+    <div class="navbar-right">
+        <ng-container *ngIf="hardcodedAuthenticationService.isUserLoggedIn()">
+        <a routerLink="/help" class="help-link">Help</a>
+        </ng-container>
+        <ng-container *ngIf="hardcodedAuthenticationService.isUserLoggedIn()">
+        <a routerLink="/logout" class="logout-link">Logout</a>
+        </ng-container>
+    </div>
+</nav>
+  

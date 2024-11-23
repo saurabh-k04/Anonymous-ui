@@ -1,0 +1,33 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* Full height minus navbar and footer */
+}
+  
+.create-post-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.post-management-container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 100px); /* Full viewport height */
+}
+  
+.post-list {
+    flex: 1; /* Take up equal space */
+    padding: 10px;
+    overflow-y: auto; /* Enable scrolling for the post list */
+    background-color: #f8f9fa; /* Light background for post list */
+    border-right: 1px solid #ddd; /* Optional: Add a border */
+}
+  
+.create-post {
+    flex: 1; /* Take up equal space */
+    padding: 20px;
+    background-color: #fff; /* White background for create post */
+}
+  
+  
