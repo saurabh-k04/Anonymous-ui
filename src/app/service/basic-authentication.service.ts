@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export const TOKEN = 'token'
@@ -35,6 +36,21 @@ export class BasicAuthenticationService {
       )
   }
 
+  executeJWTAuthenticationService(username: string, password: string) {
+    return this.http.post<any>(
+      `http://localhost:8080/authenticate`,
+      { username, password }
+      ).pipe(
+        map (
+          (data: any) => {
+            sessionStorage.setItem(AUTHENTICATED_USER, username);
+            sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+            return data;
+          }
+        )
+      )
+  }
+
   getAuthenticatedUser(){
     return sessionStorage.getItem(AUTHENTICATED_USER);
   }
@@ -57,6 +73,13 @@ export class BasicAuthenticationService {
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 5000);
+  }
+
+  signup(username: string, password: string) {
+    console.log("in signup")
+    const payload = { username, password }; // Create the payload object
+    console.log("next step")
+    return this.http.post<any>(`http://localhost:8080/signup`, payload, { responseType: 'text' as 'json' }); // POST request
   }
 }
 

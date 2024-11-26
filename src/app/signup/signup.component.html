@@ -1,6 +1,6 @@
-<div class="login-container">
-    <mat-card class="login-card">
-        <h1>Login</h1>
+<div class="signup-container">
+    <mat-card class="signup-card">
+        <h1>Sign Up</h1>
         <form>
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Username</mat-label>
@@ -12,22 +12,16 @@
                 <input matInput type="password" name="password" required="required" [(ngModel)]="password" />
             </mat-form-field>
 
-            <div *ngIf="invalidLogin" class="error-message">
+            <div *ngIf="invalidSignup" class="error-message">
                 {{ errorMessage }}
             </div>
 
-            <!-- <button mat-raised-button (click)=handleLogin() color="primary" class="login-button">
-                Login
-            </button> -->
-            <!-- <button mat-raised-button (click)=handleBasicAuthLogin() color="primary" class="login-button">
-                Login
-            </button> -->
-            <button mat-raised-button (click)=handleJWTAuthLogin() color="primary" class="login-button">
-                Login
+            <button mat-raised-button (click)=onSubmit() color="primary" class="signup-button">
+                Sign Up
             </button>
         </form>
         <p class="register-link">
-            Not a user? <a href="/signup">Register here</a>
+            Already have an account? <a href="/login">Login here</a>
         </p>
     </mat-card>
 </div>

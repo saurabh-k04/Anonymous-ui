@@ -7,10 +7,12 @@ import { LogoutComponent } from './logout/logout.component';
 import { ErrorComponent } from './error/error.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { PostsComponent } from './posts/posts.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [RouteGuardService] },
   { path: 'create-post/:id', component: CreatePostComponent, canActivate: [RouteGuardService] },
   { path: 'posts', component: PostsComponent, canActivate:[RouteGuardService] },

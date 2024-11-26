@@ -16,12 +16,13 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
 import { ErrorComponent } from './error/error.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
 import { HttpInterceptorBasicAuthenticationService } from './service/http/http-interceptor-basic-authentication.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HttpInterceptorBasicAuthenticationService } from './service/http/http-i
     CreatePostComponent,
     LogoutComponent,
     ErrorComponent,
-    PostsComponent
+    PostsComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { HttpInterceptorBasicAuthenticationService } from './service/http/http-i
     MatDatepickerModule,
     MatIconModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthenticationService, multi: true}

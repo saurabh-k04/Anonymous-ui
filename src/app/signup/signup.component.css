@@ -1,0 +1,44 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px); /* Adjust for navbar height */
+  background-color: #f5f5f5;
+}
+
+.signup-card {
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.signup-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  text-decoration: none;
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
