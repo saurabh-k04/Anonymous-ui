@@ -24,7 +24,7 @@ export class BasicAuthenticationService {
     })
 
     return this.http.get<AuthenticationBean>(
-      `http://localhost:8080/basicauth`,
+      `https://anonymousmechat-backend.onrender.com/basicauth`,
       {headers}).pipe(
         map (
           (data: any) => {
@@ -38,7 +38,7 @@ export class BasicAuthenticationService {
 
   executeJWTAuthenticationService(username: string, password: string) {
     return this.http.post<any>(
-      `http://localhost:8080/authenticate`,
+      `https://anonymousmechat-backend.onrender.com/authenticate`,
       { username, password }
       ).pipe(
         map (
@@ -79,7 +79,7 @@ export class BasicAuthenticationService {
     console.log("in signup")
     const payload = { username, password }; // Create the payload object
     console.log("next step")
-    return this.http.post<any>(`http://localhost:8080/signup`, payload, { responseType: 'text' as 'json' }); // POST request
+    return this.http.post<any>(`https://anonymousmechat-backend.onrender.com/signup`, payload, { responseType: 'text' as 'json' }); // POST request
   }
 }
 
