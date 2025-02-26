@@ -13,8 +13,9 @@ export class PostsDataService {
   constructor(private http: HttpClient) { }
 
   retrieveAllPosts(username: any){
-    return this.http.get<Post[]>(this.apiUrl + `/users/${username}/posts`);
+    // return this.http.get<Post[]>(this.apiUrl + `/users/${username}/posts`);
     //console.log("Hello world Bean service")
+    return this.http.get<Post[]>(this.apiUrl + `/posts`);
   }
 
   retrievePost(username: any, id: any){
