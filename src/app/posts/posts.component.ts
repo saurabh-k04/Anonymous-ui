@@ -7,7 +7,8 @@ export class Post{
   constructor(
     public id: number,
     public username: string,
-    public description: string
+    public description: string,
+    public image?: string // ✅ Use 'image' (not 'imageUrl' or 'imageBase64')
   ){
 
   }
@@ -47,11 +48,34 @@ export class PostsComponent implements OnInit {
     this.postDataService.retrieveAllPosts(this.username).subscribe(
       response =>{
         //console.log(response);
-        this.posts = response;
+        //this.posts = response;
+        // this.posts = response.map((post: any) => {
+        //   if (post.image) {
+        //     post.image = this.convertImage(post.image);
+        //   }
+        //   return post;
+        // });
+        this.posts = response.map((post: any) => ({
+          ...post,
+          imageBase64: post.image ? this.convertImage(post.image) : null // Apply conversion safely
+      }));
       },
       error => {
         console.error('Error fetching posts: ', error);
       }
     )
   }
+
+  convertImage(image: any): string {
+    if (!image || typeof image === "string") {
+        return image; // Return as-is if already Base64
+    }
+    try {
+        return btoa(String.fromCharCode(...new Uint8Array(image)));
+    } catch (error) {
+        console.error("Error converting image:", error);
+        return ""; // Return empty string on error
+    }
+}
+
 }

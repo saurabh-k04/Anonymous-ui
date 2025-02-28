@@ -14,6 +14,7 @@ export class CreatePostComponent implements OnInit {
   id!: number;
   post!: Post;  
   username!: string | null;
+  selectedFile: File | null = null;
 
   constructor(
     private postDataService : PostsDataService,
@@ -41,6 +42,10 @@ export class CreatePostComponent implements OnInit {
     // }
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   onSubmit() {
     //console.log('Post Submitted:', this.post);
     // You can add logic to save the post here (e.g., send data to backend).
@@ -48,10 +53,17 @@ export class CreatePostComponent implements OnInit {
       return;
     }
 
+    const formData = new FormData();
+    formData.append('username', this.username);
+    formData.append('description', this.post.description);
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
     if(this.id == -1){
       //create todo
       //console.log("in method");
-      this.postDataService.createPost(this.username, this.post).subscribe(
+      this.postDataService.createPost(this.username, this.post, this.selectedFile || new File([], "")).subscribe(
         data => {
           //console.log(data)
           this.router.navigate(['dashboard']);

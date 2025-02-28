@@ -1,7 +1,7 @@
 <div class="login-container">
     <mat-card class="login-card">
         <h1>Login</h1>
-        <form>
+        <!-- <form>
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Username</mat-label>
                 <input matInput type="text" name="username" required="required" [(ngModel)]="username" />
@@ -16,18 +16,60 @@
                 {{ errorMessage }}
             </div>
 
-            <!-- <button mat-raised-button (click)=handleLogin() color="primary" class="login-button">
-                Login
-            </button> -->
-            <!-- <button mat-raised-button (click)=handleBasicAuthLogin() color="primary" class="login-button">
-                Login
-            </button> -->
             <button mat-raised-button (click)=handleJWTAuthLogin() color="primary" class="login-button">
                 Login
             </button>
+        </form> -->
+
+        <form #loginForm="ngForm" (ngSubmit)="handleJWTAuthLogin(loginForm)">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Username</mat-label>
+              <input 
+                matInput 
+                type="email" 
+                name="username" 
+                required 
+                [(ngModel)]="username" 
+                #usernameField="ngModel"
+                email
+              />
+              <mat-error *ngIf="usernameField.invalid && usernameField.touched">
+                <span *ngIf="usernameField.errors?.['required']">Email is required.</span>
+                <span *ngIf="usernameField.errors?.['email']">Invalid email format.</span>
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Password</mat-label>
+              <input 
+                matInput 
+                type="password" 
+                name="password" 
+                required 
+                [(ngModel)]="password" 
+                #passwordField="ngModel"
+                minlength="6"
+              />
+              <mat-error *ngIf="passwordField.invalid && passwordField.touched">
+                <span *ngIf="passwordField.errors?.['required']">Password is required.</span>
+                <span *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</span>
+              </mat-error>
+            </mat-form-field>
+          
+            <button mat-raised-button type="submit" color="primary" class="login-button" [disabled]="loginForm.invalid">
+              Login
+            </button>
         </form>
+          
         <p class="register-link">
             Not a user? <a href="/signup">Register here</a>
         </p>
     </mat-card>
 </div>
+
+<!-- <button mat-raised-button (click)=handleLogin() color="primary" class="login-button">
+    Login
+</button> -->
+<!-- <button mat-raised-button (click)=handleBasicAuthLogin() color="primary" class="login-button">
+    Login
+</button> -->

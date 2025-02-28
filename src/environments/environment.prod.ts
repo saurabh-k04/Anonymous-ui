@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://anonymousme-backend.onrender.com' // Render backend URL
+    apiUrl: 'http://localhost:8080' // Render backend URL
 };
   

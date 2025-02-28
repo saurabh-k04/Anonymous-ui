@@ -13,8 +13,9 @@ export class PostsDataService {
   constructor(private http: HttpClient) { }
 
   retrieveAllPosts(username: any){
-    return this.http.get<Post[]>(this.apiUrl + `/users/${username}/posts`);
+    // return this.http.get<Post[]>(this.apiUrl + `/users/${username}/posts`);
     //console.log("Hello world Bean service")
+    return this.http.get<Post[]>(this.apiUrl + `/posts`);
   }
 
   retrievePost(username: any, id: any){
@@ -28,9 +29,26 @@ export class PostsDataService {
     //console.log("Hello world Bean service")
   }
 
-  createPost(username: any, post: any){
-    console.log("in");
-    return this.http.post(this.apiUrl + `/users/${username}/posts`, post);
-    //console.log("Hello world Bean service")
+  // createPost(username: any, post: any){
+  //   console.log("in");
+  //   return this.http.post(this.apiUrl + `/users/${username}/posts`, post);
+  //   //console.log("Hello world Bean service")
+  // }
+
+  createPost(username: string, post: any, file: File | null) {
+    const formData = new FormData();
+
+    // Remove 'username' from post before sending
+    const { username: _, ...postWithoutUsername } = post;
+
+    // Convert JSON object to Blob and append it as 'post'
+    formData.append("post", new Blob([JSON.stringify(postWithoutUsername)], { type: "application/json" }));
+
+    // Append image file if available
+    if (file) {
+        formData.append("image", file);
+    }
+
+    return this.http.post(`${this.apiUrl}/users/${username}/posts`, formData);
   }
 }

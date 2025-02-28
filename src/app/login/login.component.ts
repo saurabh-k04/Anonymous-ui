@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,10 @@ export class LoginComponent  implements OnInit {
       )
   }
 
-  handleJWTAuthLogin() {
+  handleJWTAuthLogin(loginForm: NgForm) {
+    if (loginForm.invalid) {
+      return; // Prevent API call if form is invalid
+    }
     this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
         data => {

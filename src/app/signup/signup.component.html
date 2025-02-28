@@ -1,27 +1,82 @@
 <div class="signup-container">
-    <mat-card class="signup-card">
-        <h1>Sign Up</h1>
-        <form>
-            <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Username</mat-label>
-                <input matInput type="text" name="username" required="required" [(ngModel)]="username" />
-            </mat-form-field>
+  <mat-card class="signup-card">
+      <h1>Sign Up</h1>
 
-            <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" name="password" required="required" [(ngModel)]="password" />
-            </mat-form-field>
+      <!-- Signup Form -->
+      <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" *ngIf="!isOtpSent">
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Email (Username)</mat-label>
+              <input 
+                  matInput 
+                  type="email" 
+                  name="username" 
+                  required 
+                  [(ngModel)]="username" 
+                  #usernameField="ngModel"
+                  email
+              />
+              <mat-error *ngIf="usernameField.invalid && usernameField.touched">
+                  <span *ngIf="usernameField.errors?.['required']">Email is required.</span>
+                  <span *ngIf="usernameField.errors?.['email']">Invalid email format.</span>
+              </mat-error>
+          </mat-form-field>
 
-            <div *ngIf="invalidSignup" class="error-message">
-                {{ errorMessage }}
-            </div>
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Password</mat-label>
+              <input 
+                  matInput 
+                  type="password" 
+                  name="password" 
+                  required 
+                  [(ngModel)]="password" 
+                  #passwordField="ngModel"
+                  minlength="6"
+              />
+              <mat-error *ngIf="passwordField.invalid && passwordField.touched">
+                  <span *ngIf="passwordField.errors?.['required']">Password is required.</span>
+                  <span *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</span>
+              </mat-error>
+          </mat-form-field>
 
-            <button mat-raised-button (click)=onSubmit() color="primary" class="signup-button">
-                Sign Up
-            </button>
-        </form>
-        <p class="register-link">
-            Already have an account? <a href="/login">Login here</a>
-        </p>
-    </mat-card>
+          <button mat-raised-button type="submit" color="primary" class="signup-button" [disabled]="signupForm.invalid">
+              Get OTP
+          </button>
+      </form>
+
+      <!-- OTP Verification Form -->
+      <form #otpForm="ngForm" (ngSubmit)="onVerifyOtp()" *ngIf="isOtpSent">
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Enter OTP</mat-label>
+              <input 
+                  matInput 
+                  type="text" 
+                  name="otp" 
+                  required 
+                  [(ngModel)]="otp" 
+                  #otpField="ngModel"
+                  minlength="4" maxlength="4"
+              />
+              <mat-error *ngIf="otpField.invalid && otpField.touched">
+                  <span *ngIf="otpField.errors?.['required']">OTP is required.</span>
+                  <span *ngIf="otpField.errors?.['minlength'] || otpField.errors?.['maxlength']">OTP must be 4 digits.</span>
+              </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button type="submit" color="primary" class="verify-button" [disabled]="otpForm.invalid">
+              Verify OTP
+          </button>
+
+          <button mat-button color="warn" class="resend-button" (click)="resendOtp()" *ngIf="showResendOtp">
+              Resend OTP
+          </button>
+
+          <div *ngIf="invalidSignup" class="error-message">
+              {{ errorMessage }}
+          </div>
+      </form>
+
+      <p class="register-link">
+          Already have an account? <a routerLink="/login">Login here</a>
+      </p>
+  </mat-card>
 </div>

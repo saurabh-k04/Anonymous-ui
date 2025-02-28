@@ -12,6 +12,8 @@ export const AUTHENTICATED_USER = 'authenticateUser'
 })
 export class BasicAuthenticationService {
 
+  private BASE_URL = 'http://localhost:8080';  // ✅ Define base URL to avoid repetition
+
   constructor(private router : Router,
     private http : HttpClient
   ) { }
@@ -24,7 +26,7 @@ export class BasicAuthenticationService {
     })
 
     return this.http.get<AuthenticationBean>(
-      `https://anonymousmechat-backend.onrender.com/basicauth`,
+      `${this.BASE_URL}/basicauth`,
       {headers}).pipe(
         map (
           (data: any) => {
@@ -38,7 +40,7 @@ export class BasicAuthenticationService {
 
   executeJWTAuthenticationService(username: string, password: string) {
     return this.http.post<any>(
-      `https://anonymousmechat-backend.onrender.com/authenticate`,
+      `${this.BASE_URL}/authenticate`,
       { username, password }
       ).pipe(
         map (
@@ -50,6 +52,27 @@ export class BasicAuthenticationService {
         )
       )
   }
+
+  // ✅ SIGNUP: Sends OTP to email
+  signup(username: string, password: string) {
+    console.log('Sending OTP to:', username);
+    const payload = { username, password };
+    return this.http.post<any>(`${this.BASE_URL}/signup`, payload, { responseType: 'text' as 'json' });
+  }
+
+  // ✅ Correctly Calls Backend API to Send OTP
+  sendOtp(username: string, password: string) {
+    console.log('Sending OTP to:', username);
+    const payload = { username, password };
+    return this.http.post<any>(`${this.BASE_URL}/auth/send-otp`, payload, { responseType: 'text' as 'json' });
+  }
+
+  // ✅ OTP VERIFICATION: Completes signup
+  verifyOtp(email: string, otp: string) {
+    const payload = { email, otp };  // Ensure keys match backend DTO (OtpRequest)
+    return this.http.post<any>(`${this.BASE_URL}/auth/verify-otp`, payload, { responseType: 'text' as 'json' });
+  }
+  
 
   getAuthenticatedUser(){
     return sessionStorage.getItem(AUTHENTICATED_USER);
@@ -75,12 +98,12 @@ export class BasicAuthenticationService {
     }, 5000);
   }
 
-  signup(username: string, password: string) {
-    console.log("in signup")
-    const payload = { username, password }; // Create the payload object
-    console.log("next step")
-    return this.http.post<any>(`https://anonymousmechat-backend.onrender.com/signup`, payload, { responseType: 'text' as 'json' }); // POST request
-  }
+  // signup(username: string, password: string) {
+  //   console.log("in signup")
+  //   const payload = { username, password }; // Create the payload object
+  //   console.log("next step")
+  //   return this.http.post<any>(`http://localhost:8080/signup`, payload, { responseType: 'text' as 'json' }); // POST request
+  // }
 }
 
 export class AuthenticationBean{
