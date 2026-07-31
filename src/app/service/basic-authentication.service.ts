@@ -12,7 +12,7 @@ export const AUTHENTICATED_USER = 'authenticateUser'
 })
 export class BasicAuthenticationService {
 
-  private BASE_URL = 'https://anonymousmechat-backend.onrender.com';  // ✅ Define base URL to avoid repetition
+  private BASE_URL = 'https://anonymousme-backend-new.onrender.com';  // ✅ Define base URL to avoid repetition
 
   constructor(private router : Router,
     private http : HttpClient
