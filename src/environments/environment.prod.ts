@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://anonymousmechat-backend.onrender.com' // Render backend URL
+    apiUrl: 'https://anonymousme-backend-new.onrender.com' // Render backend URL
 };
   
